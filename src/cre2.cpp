@@ -335,6 +335,8 @@ cre2_strings_to_ranges (const char * text, cre2_range_t * ranges, cre2_string_t 
   NAME (const char * pattern, const cre2_string_t * text,		\
 	cre2_string_t * match, int nmatch)				\
   {									\
+    if (nmatch <= 0) \
+      return 0; \
     re2::StringPiece	input(text->data, text->length);		\
     std::vector<re2::StringPiece>	strv(nmatch);			\
     std::vector<RE2::Arg>		argv(nmatch);			\
@@ -364,6 +366,8 @@ DEFINE_MATCH_ZSTRING_FUN(cre2_partial_match,PartialMatchN)
   NAME (const char * pattern, cre2_string_t * text,			\
 	cre2_string_t * match, int nmatch)				\
   {									\
+    if (nmatch <=0 ) \
+      return 0; \
     re2::StringPiece	input(text->data, text->length);		\
     std::vector<re2::StringPiece>	strv(nmatch);			\
     std::vector<RE2::Arg>		argv(nmatch);			\
@@ -398,6 +402,8 @@ DEFINE_MATCH_ZSTRING_FUN2(cre2_find_and_consume,FindAndConsumeN)
   NAME (cre2_regexp_t * rex, const cre2_string_t * text,		\
 	cre2_string_t * match, int nmatch)				\
   {									\
+    if (nmatch <= 0) \
+      return 0; \
     re2::StringPiece	input(text->data, text->length);		\
     std::vector<re2::StringPiece>	strv(nmatch);			\
     std::vector<RE2::Arg>		argv(nmatch);			\
@@ -427,6 +433,8 @@ DEFINE_MATCH_REX_FUN(cre2_partial_match_re,PartialMatchN)
   NAME (cre2_regexp_t * rex, cre2_string_t * text,			\
 	cre2_string_t * match, int nmatch)				\
   {									\
+    if (nmatch <=0 ) \
+      return 0; \
     re2::StringPiece	input(text->data, text->length);		\
     std::vector<re2::StringPiece>	strv(nmatch);			\
     std::vector<RE2::Arg>		argv(nmatch);			\
